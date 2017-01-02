@@ -1,40 +1,71 @@
+//gulp module
 import gulp from 'gulp';
+//postcss plugin to parse CSS and add vendor prefixes
 import autoprefixer from 'autoprefixer';
+//lets you require modules
 import browserify from 'browserify';
+//lets you watch files system for changes
 import watchify from 'watchify';
+//lets you get text of a source
 import source from 'vinyl-source-stream';
+//text buffers
 import buffer from 'vinyl-buffer';
+//lint files
 import eslint from 'gulp-eslint';
+//lets you do the babel browserify thing
 import babelify from 'babelify';
+//file minification
 import uglify from 'gulp-uglify';
+//rm -rf for nodejs
 import rimraf from 'rimraf';
+//native os notifications
 import notify from 'gulp-notify';
+//will reload browser
 import browserSync, { reload } from 'browser-sync';
+//adds sourcemaps
 import sourcemaps from 'gulp-sourcemaps';
+//transform styles with js plugins
 import postcss from 'gulp-postcss';
+//rename files easily
 import rename from 'gulp-rename';
+//can unwrap nested sass-like rules
 import nested from 'postcss-nested';
+//blah sass
 import vars from 'postcss-simple-vars';
+//blah sass
 import extend from 'postcss-simple-extend';
+//minifies css
 import cssnano from 'cssnano';
+//replaces 'build-blocks' in html, say if you wanted to use a minified version when running your production build
 import htmlReplace from 'gulp-html-replace';
+//minifies images
 import imagemin from 'gulp-imagemin';
+//minifies images
 import pngquant from 'imagemin-pngquant';
+//run a sereis of gulp tasks in a specified order
 import runSequence from 'run-sequence';
+//gulp plugin to publish contents to gh-pages
 import ghPages from 'gulp-gh-pages';
 
 const paths = {
+//final js location
   bundle: 'app.js',
+//entry point for source js file
   entry: 'src/Index.js',
+  //where css is located
   srcCss: 'src/**/*.scss',
+  //where images are located
   srcImg: 'src/images/**',
+  //where js linting needs to be done
   srcLint: ['src/**/*.js', 'test/**/*.js'],
+  //the distribution folder (final build)
   dist: 'dist',
   distJs: 'dist/js',
   distImg: 'dist/images',
   distDeploy: './dist/**/*'
 };
 
+//in debug mode by default
 const customOpts = {
   entries: [paths.entry],
   debug: true,
@@ -42,6 +73,7 @@ const customOpts = {
   packageCache: {}
 };
 
+//creates main options
 const opts = Object.assign({}, watchify.args, customOpts);
 
 gulp.task('clean', cb => {
