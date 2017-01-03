@@ -18,3 +18,7 @@ test('should contains an H2', t => {
 test('should have an h2 tag containing the text "About"', t => {
   t.is(about.props.children[0].props.children, 'About');
 });
+
+test('a dumb test', t => {
+  t.is(1, 2);
+});
